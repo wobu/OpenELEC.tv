@@ -1,0 +1,67 @@
+#!/bin/sh 
+################################################################################
+#      This file is part of OpenELEC - http://www.openelec.tv
+#      Copyright (C) 2009-2011 Stephan Raue (stephan@openelec.tv)
+#      Copyright (C) 2010-2011 Roman Weber (roman@openelec.tv)
+#
+#  This Program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2, or (at your option)
+#  any later version.
+#
+#  This Program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with OpenELEC.tv; see the file COPYING.  If not, write to
+#  the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+#  http://www.gnu.org/copyleft/gpl.html
+################################################################################
+
+
+. config/options $1
+cd $PKG_BUILD
+make DESTDIR=$ROOT/$BUILD/image/system install
+#mkdir -p $INSTALL/usr/bin
+#mkdir -p $INSTALL/lib/systemd
+# cp $PKG_BUILD/systemd-cgls $INSTALL/usr/bin
+# cp $PKG_BUILD/systemd-cgroups-agent $INSTALL/lib/systemd
+# cp $PKG_BUILD/systemd-logger $INSTALL/lib/systemd
+# cp $PKG_BUILD/systemd-shutdownd $INSTALL/lib/systemd
+# cp $PKG_BUILD/systemd-shutdown $INSTALL/lib/systemd
+# cp $PKG_BUILD/systemd-modules-load $INSTALL/lib/systemd
+# cp $PKG_BUILD/systemd-kmsg-syslogd $INSTALL/lib/systemd
+# cp $PKG_BUILD/systemd-tmpfiles $INSTALL/lib/systemd
+
+#mkdir -p $INSTALL/usr/share/dbus-1/interfaces
+# cp $PKG_BUILD/org.freedesktop.systemd1.*.xml $INSTALL/usr/share/dbus-1/interfaces
+
+#mkdir -p $INSTALL/etc/dbus-1/system.d
+# cp $PKG_BUILD/src/org.freedesktop.systemd1.conf $INSTALL/etc/dbus-1/system.d
+
+#mkdir -p $INSTALL/usr/share/dbus-1/system-services
+# cp $PKG_BUILD/src/org.freedesktop.systemd1.service $INSTALL/usr/share/dbus-1/system-services
+# cp $PKG_BUILD/src/org.freedesktop.systemd1.service $INSTALL/usr/share/dbus-1/services/org.freedesktop.systemd1.service
+
+#mkdir -p $INSTALL/etc/systemd
+# cp $PKG_DIR/config/system.conf $INSTALL/etc/systemd
+
+#mkdir -p $INSTALL/usr/share/polkit-1/actions
+# cp $PKG_BUILD/src/org.freedesktop.systemd1.policy $INSTALL/usr/share/polkit-1/actions
+
+#mkdir -p $INSTALL/lib/udev/rules.d
+# cp $PKG_BUILD/src/99-systemd.rules $INSTALL/lib/udev/rules.d
+
+#mkdir -p $INSTALL/etc/systemd
+# ln -s /var/etc/systemd/system $INSTALL/etc/systemd/system
+
+#mkdir -p $INSTALL/bin
+# cp $PKG_BUILD/systemctl $INSTALL/bin
+# ln -s /bin/systemctl $INSTALL/sbin/reboot 
+# ln -s /bin/systemctl $INSTALL/sbin/halt
+# ln -s /bin/systemctl $INSTALL/sbin/poweroff
+# cp $PKG_BUILD/systemd $INSTALL/bin
+# cp $PKG_BUILD/systemd-notify $INSTALL/bin
+
