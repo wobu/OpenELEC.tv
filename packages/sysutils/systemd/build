@@ -22,8 +22,10 @@
 
 . config/options $1
 
-cd $PKG_BUILD
+# systemd fails to build with LTO support
+  strip_lto
 
+cd $PKG_BUILD
 ./configure --host=$TARGET_NAME \
             --build=$HOST_NAME \
             --prefix=/usr \
@@ -43,5 +45,5 @@ cd $PKG_BUILD
 make
 
 mkdir -p $SYSROOT_PREFIX/usr/lib/pkgconfig
- cp systemd.pc $SYSROOT_PREFIX/usr/lib/pkgconfig
+  cp systemd.pc $SYSROOT_PREFIX/usr/lib/pkgconfig
 
