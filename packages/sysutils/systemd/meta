@@ -1,6 +1,7 @@
 ################################################################################
 #      This file is part of OpenELEC - http://www.openelec.tv
 #      Copyright (C) 2009-2011 Stephan Raue (stephan@openelec.tv)
+#      Copyright (C) 2010-2011 Roman Weber (roman@openelec.tv)
 #
 #  This Program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -18,19 +19,17 @@
 #  http://www.gnu.org/copyleft/gpl.html
 ################################################################################
 
-PKG_NAME="busybox"
-PKG_VERSION="1.19.2"
+PKG_NAME="systemd"
+PKG_VERSION="33"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
-PKG_SITE="http://www.busybox.net"
-PKG_URL="http://busybox.net/downloads/$PKG_NAME-$PKG_VERSION.tar.bz2"
-PKG_DEPENDS="systemd kexec-tools grep hdparm speedcontrol pastebinit"
-PKG_BUILD_DEPENDS="toolchain busybox-hosttools"
+PKG_SITE="http://www.freedesktop.org/wiki/Software/systemd"
+PKG_URL="http://www.freedesktop.org/software/systemd/$PKG_NAME-$PKG_VERSION.tar.bz2"
+PKG_DEPENDS="libcap dbus dbus-glib udev"
+PKG_BUILD_DEPENDS="toolchain libcap vala dbus dbus-glib udev"
 PKG_PRIORITY="required"
 PKG_SECTION="system"
-PKG_SHORTDESC="BusyBox: The Swiss Army Knife of Embedded Linux"
-PKG_LONGDESC="BusyBox combines tiny versions of many common UNIX utilities into a single small executable. It provides replacements for most of the utilities you usually find in GNU fileutils, shellutils, etc. The utilities in BusyBox generally have fewer options than their full-featured GNU cousins; however, the options that are included provide the expected functionality and behave very much like their GNU counterparts. BusyBox provides a fairly complete environment for any small or embedded system."
+PKG_SHORTDESC="systemd: a system and session manager"
+PKG_LONGDESC="systemd is a system and session manager for Linux, compatible with SysV and LSB init scripts. systemd provides aggressive parallelization capabilities, uses socket and D-Bus activation for starting services, offers on-demand starting of daemons, keeps track of processes using Linux cgroups, supports snapshotting and restoring of the system state, maintains mount and automount points and implements an elaborate transactional dependency-based service control logic. It can work as a drop-in replacement for sysvinit."
 PKG_IS_ADDON="no"
-
-PKG_AUTORECONF="no"
