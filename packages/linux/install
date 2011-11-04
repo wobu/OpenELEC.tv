@@ -26,12 +26,12 @@ RAMFS_DRV_SUBSYSTEMS="ata ide scsi"
 
 VER=`ls $PKG_BUILD/modules/lib/modules`
 
-mkdir -p $INSTALL/lib/modules/$VER
-  cp -r $PKG_BUILD/modules/* $INSTALL
-  rm -f $INSTALL/lib/modules/$VER/modules.*
+mkdir -p $INSTALL/usr/lib/modules/$VER
+  cp -r $PKG_BUILD/modules/* $INSTALL/usr
+  rm -f $INSTALL/usr/lib/modules/$VER/modules.*
 
-$ROOT/$TOOLCHAIN/sbin/depmod -b $INSTALL $VER > /dev/null
-for i in `ls $INSTALL/lib/modules/*/modules.* | grep -v modules.dep | grep -v modules.alias | grep -v modules.symbols`; do
+$ROOT/$TOOLCHAIN/sbin/depmod -b $INSTALL/usr $VER > /dev/null
+for i in `ls $INSTALL/usr/lib/modules/*/modules.* | grep -v modules.dep | grep -v modules.alias | grep -v modules.symbols`; do
   rm -f $i
 done
 
