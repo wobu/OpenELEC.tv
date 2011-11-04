@@ -1,0 +1,35 @@
+diff -Naur udev-173/rules/rules.d/50-udev-default.rules udev-173.patch/rules/rules.d/50-udev-default.rules
+--- udev-173/rules/rules.d/50-udev-default.rules	2011-07-18 20:00:25.000000000 +0200
++++ udev-173.patch/rules/rules.d/50-udev-default.rules	2011-11-04 19:46:11.718724221 +0100
+@@ -98,7 +98,7 @@
+ KERNEL=="cpu[0-9]*",		MODE="0444"
+ 
+ KERNEL=="fuse", ACTION=="add",	MODE="0666", OPTIONS+="static_node=fuse", \
+-  RUN+="/bin/mount -t fusectl fusectl /sys/fs/fuse/connections"
++  RUN+="/bin/busybox mount -t fusectl fusectl /sys/fs/fuse/connections"
+ 
+ SUBSYSTEM=="rtc", DRIVERS=="rtc_cmos", SYMLINK+="rtc"
+ KERNEL=="mmtimer",		MODE="0644"
+diff -Naur udev-173/rules/rules.d/80-drivers.rules udev-173.patch/rules/rules.d/80-drivers.rules
+--- udev-173/rules/rules.d/80-drivers.rules	2010-05-27 18:51:51.000000000 +0200
++++ udev-173.patch/rules/rules.d/80-drivers.rules	2011-11-04 19:46:51.274219736 +0100
+@@ -2,12 +2,12 @@
+ 
+ ACTION=="remove", GOTO="drivers_end"
+ 
+-DRIVER!="?*", ENV{MODALIAS}=="?*", RUN+="/sbin/modprobe -bv $env{MODALIAS}"
+-SUBSYSTEM=="tifm", ENV{TIFM_CARD_TYPE}=="SD", RUN+="/sbin/modprobe -bv tifm_sd"
+-SUBSYSTEM=="tifm", ENV{TIFM_CARD_TYPE}=="MS", RUN+="/sbin/modprobe -bv tifm_ms"
+-SUBSYSTEM=="memstick", RUN+="/sbin/modprobe -bv --all ms_block mspro_block"
+-SUBSYSTEM=="i2o", RUN+="/sbin/modprobe -bv i2o_block"
+-SUBSYSTEM=="scsi", ENV{DEVTYPE}=="scsi_device", TEST!="[module/sg]", RUN+="/sbin/modprobe -bv sg"
+-SUBSYSTEM=="module", KERNEL=="parport_pc", RUN+="/sbin/modprobe -bv ppdev"
++DRIVER!="?*", ENV{MODALIAS}=="?*", RUN+="/bin/busybox modprobe -bv $env{MODALIAS}"
++SUBSYSTEM=="tifm", ENV{TIFM_CARD_TYPE}=="SD", RUN+="/bin/busybox modprobe -bv tifm_sd"
++SUBSYSTEM=="tifm", ENV{TIFM_CARD_TYPE}=="MS", RUN+="/bin/busybox modprobe -bv tifm_ms"
++SUBSYSTEM=="memstick", RUN+="/bin/busybox modprobe -bv --all ms_block mspro_block"
++SUBSYSTEM=="i2o", RUN+="/bin/busybox modprobe -bv i2o_block"
++SUBSYSTEM=="scsi", ENV{DEVTYPE}=="scsi_device", TEST!="[module/sg]", RUN+="/bin/busybox modprobe -bv sg"
++SUBSYSTEM=="module", KERNEL=="parport_pc", RUN+="/bin/busybox modprobe -bv ppdev"
+ 
+ LABEL="drivers_end"
