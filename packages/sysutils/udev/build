@@ -30,8 +30,9 @@ LDFLAGS="$LDFLAGS -I$SYSROOT_PREFIX/usr/include/glib-2.0" \
 ./configure --host=$TARGET_NAME \
             --build=$HOST_NAME \
             --prefix=/usr \
+            --bindir=/usr/bin \
+            --sbindir=/usr/bin \
             --sysconfdir=/etc \
-            --sbindir=/sbin \
             --libexecdir=/lib/udev \
             --localstatedir=/var \
             --disable-silent-rules \
@@ -52,7 +53,7 @@ LDFLAGS="$LDFLAGS -I$SYSROOT_PREFIX/usr/include/glib-2.0" \
             --disable-edd \
             --without-selinux \
             --without-systemdsystemunitdir \
-            --with-firmware-path=/lib/firmware \
+            --with-firmware-path="/storage/.config/firmware:/usr/lib/firmware" \
             --with-pci-ids-path=/usr/share/pci.ids \
             --with-usb-ids-path=/usr/share/usb.ids \
             --with-gnu-ld \

@@ -32,9 +32,9 @@ add_group tape 33
 add_group tty 5
 add_group video 39
 
-mkdir -p $INSTALL/sbin
-  cp $PKG_BUILD/$1/udevadm $INSTALL/sbin
-  cp $PKG_BUILD/$1/udevd $INSTALL/sbin
+mkdir -p $INSTALL/usr/bin
+  cp $PKG_BUILD/$1/udevadm $INSTALL/usr/bin
+  cp $PKG_BUILD/$1/udevd $INSTALL/usr/bin
 
 mkdir -p $INSTALL/usr/lib
   cp -PR $PKG_BUILD/libudev/.libs/libudev.so* $INSTALL/usr/lib
