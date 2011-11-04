@@ -33,10 +33,10 @@ mkdir -p $INSTALL/usr/lib
 mkdir -p $INSTALL/lib/udev/rules.d
   cp $PKG_BUILD/driver/linux/*.rules $INSTALL/lib/udev/rules.d
 
-mkdir -p $INSTALL/lib/modules/$VER/crystalhd
-  cp $PKG_BUILD/driver/linux/crystalhd.ko $INSTALL/lib/modules/$VER/crystalhd
+mkdir -p $INSTALL/usr/lib/modules/$VER/crystalhd
+  cp $PKG_BUILD/driver/linux/crystalhd.ko $INSTALL/usr/lib/modules/$VER/crystalhd
 
-$ROOT/$TOOLCHAIN/sbin/depmod -b $INSTALL $VER > /dev/null
-for i in `ls $INSTALL/lib/modules/*/modules.* | grep -v modules.dep | grep -v modules.alias | grep -v modules.symbols`; do
+$ROOT/$TOOLCHAIN/sbin/depmod -b $INSTALL/usr $VER > /dev/null
+for i in `ls $INSTALL/usr/lib/modules/*/modules.* | grep -v modules.dep | grep -v modules.alias | grep -v modules.symbols`; do
   rm -f $i
 done
