@@ -147,7 +147,7 @@ IMAGE_NAME="$DISTRONAME-$TARGET_VERSION"
   [ "$OEM_SUPPORT" = "yes" ] && $SCRIPTS/install oem
 
 # strip kernel modules
-  for MOD in `find $INSTALL/lib/modules/ -name *.ko`; do
+  for MOD in `find $INSTALL/usr/lib/modules/ -name *.ko`; do
     $STRIP --strip-debug $MOD
   done
 
