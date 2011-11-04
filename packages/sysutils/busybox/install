@@ -33,8 +33,10 @@ USER_PWD="`$ROOT/$TOOLCHAIN/bin/cryptpw -m sha512 $USER_PASSWORD`"
   add_group $USER_GROUP 1000
 
   cp -PR $BUILD/busybox*/_install-system/* $INSTALL
-  ln -sf busybox $INSTALL/bin/sh
-  echo "chmod 4755 $INSTALL/bin/busybox" >> $FAKEROOT_SCRIPT
+    ln -sf busybox $INSTALL/bin/sh
+    ln -sf busybox $INSTALL/bin/mount
+    ln -sf busybox $INSTALL/bin/umount
+    echo "chmod 4755 $INSTALL/bin/busybox" >> $FAKEROOT_SCRIPT
 
   mkdir -p $INSTALL/usr/bin
     cp $PKG_DIR/scripts/createlog $INSTALL/usr/bin/

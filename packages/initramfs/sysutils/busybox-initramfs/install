@@ -25,6 +25,8 @@
 mkdir -p $INSTALL/bin
   cp -PR $BUILD/busybox*/_install-system/bin/busybox $INSTALL/bin
   ln -sf busybox $INSTALL/bin/sh
+  ln -sf busybox $INSTALL/bin/mount
+  ln -sf busybox $INSTALL/bin/umount
   chmod 4755 $INSTALL/bin/busybox
 
 mkdir -p $INSTALL/etc
