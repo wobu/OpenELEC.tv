@@ -36,9 +36,10 @@ for i in `ls $INSTALL/usr/lib/modules/*/modules.* | grep -v modules.dep | grep -
 done
 
 # copy kernel firmwares (if present and requested)
-  mkdir -p $INSTALL/lib/firmware
-  [ -d $PKG_BUILD/modules/lib/firmware ] && \
-    cp -rf $PKG_BUILD/modules/lib/firmware/* $INSTALL/lib/firmware || true
+  if [ -d $PKG_BUILD/modules/lib/firmware ]; then
+    mkdir -p $INSTALL/usr/lib/firmware
+    cp -rf $PKG_BUILD/modules/lib/firmware/* $INSTALL/usr/lib/firmware || true
+  fi
 
 mkdir -p $INSTALL/etc
   cp $PKG_DIR/config/modules $INSTALL/etc
