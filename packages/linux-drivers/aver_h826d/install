@@ -1,3 +1,5 @@
+#!/bin/sh
+
 ################################################################################
 #      This file is part of OpenELEC - http://www.openelec.tv
 #      Copyright (C) 2009-2011 Stephan Raue (stephan@openelec.tv)
@@ -18,19 +20,9 @@
 #  http://www.gnu.org/copyleft/gpl.html
 ################################################################################
 
-PKG_NAME="Imaging"
-PKG_VERSION="1.1.7"
-PKG_REV="1"
-PKG_ARCH="any"
-PKG_LICENSE="BSD"
-PKG_SITE="http://www.pythonware.com/products/pil/"
-PKG_URL="http://effbot.org/media/downloads/$PKG_NAME-$PKG_VERSION.tar.gz"
-PKG_DEPENDS="Python distribute zlib freetype $LIBJPEG"
-PKG_BUILD_DEPENDS="toolchain Python distribute distutilscross zlib freetype $LIBJPEG"
-PKG_PRIORITY="optional"
-PKG_SECTION="python/system"
-PKG_SHORTDESC="pil: Imaging handling/processing for Python"
-PKG_LONGDESC="The Python Imaging Library (PIL) adds image processing capabilities to your Python interpreter. This library supports many file formats, and provides powerful image processing and graphics capabilities."
-PKG_IS_ADDON="no"
+. config/options $1
 
-PKG_AUTORECONF="no"
+VER=`ls $BUILD/linux*/modules/lib/modules`
+
+mkdir -p $INSTALL/lib/modules/$VER/aver_h826d
+  cp $PKG_BUILD/installer/src/*.ko $INSTALL/lib/modules/$VER/aver_h826d
