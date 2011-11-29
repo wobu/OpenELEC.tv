@@ -1,7 +1,8 @@
+#!/bin/sh
+
 ################################################################################
 #      This file is part of OpenELEC - http://www.openelec.tv
 #      Copyright (C) 2009-2011 Stephan Raue (stephan@openelec.tv)
-#      Copyright (C) 2010-2011 Roman Weber (roman@openelec.tv)
 #
 #  This Program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -18,20 +19,11 @@
 #  the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 #  http://www.gnu.org/copyleft/gpl.html
 ################################################################################
-# Mediacenter environment variables.
-#
-# This file contains non-OpenELEC evironment variables as well as OpenELEC
-# evironment variables that are not user defined.
-################################################################################
 
-XBMC_HOME="/usr/share/xbmc"
+. config/options $1
 
-export XBMC_HOME
+mkdir -p $INSTALL/etc/mdadm/
+	cp $PKG_BUILD/mdadm.conf-example $INSTALL/etc/mdadm/mdadm.conf
 
-GPUDEVICE=$(lspci -n | grep 0300)
-GPUTYPE="OTHER"
-[ "$(echo $GPUDEVICE | grep 8086)" ] && GPUTYPE="INTEL"   # 8086 == INTEL
-[ "$(echo $GPUDEVICE | grep 10de)" ] && GPUTYPE="NVIDIA"  # 10de == NVIDIA
-[ "$(echo $GPUDEVICE | grep 1002)" ] && GPUTYPE="AMD"     # 1002 == AMD
-
-export GPUTYPE
+mkdir -p $INSTALL/sbin/mdadm/
+	cp $PKG_BUILD/mdadm $INSTALL/sbin/mdadm/mdadm

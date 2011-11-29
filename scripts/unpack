@@ -56,7 +56,7 @@ rm -rf $BUILD/$1[-_]cvs*
 rm -rf $BUILD/$1[-_]svn*
 rm -rf $BUILD/$1[-_]git*
 
-if [ -n "$PKG_URL" ]; then
+if [ -n $PKG_URL ] || [ -n $PKG_PATH ]; then
   $SCRIPTS/extract $1 "$1*.tar.bz2" $BUILD
   $SCRIPTS/extract $1 "$1*.tbz"     $BUILD
   $SCRIPTS/extract $1 "$1*.tar.gz"  $BUILD

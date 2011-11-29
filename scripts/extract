@@ -27,12 +27,17 @@ if [ -z "$3" ]; then
   exit 1
 fi
 
+if [ -z "$PKG_URL" ] && [ -n "$PKG_PATH" ]; then
+	PKG_URL=$PKG_PATH
+echo "bla"
+fi
+
 [ -z "$PKG_URL" ] && exit 1
 [ ! -d "$SOURCES/$1" -o ! -d "$3" ] && exit 1
 
 for i in $PKG_URL; do
   FILE="`basename $i`"
-
+	echo "bla2"
   case $FILE in
   $2)
     f="$SOURCES/$1/$FILE"
