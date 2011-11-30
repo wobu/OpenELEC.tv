@@ -29,7 +29,6 @@ fi
 
 if [ -z "$PKG_URL" ] && [ -n "$PKG_PATH" ]; then
 	PKG_URL=$PKG_PATH
-echo "bla"
 fi
 
 [ -z "$PKG_URL" ] && exit 1
@@ -37,7 +36,7 @@ fi
 
 for i in $PKG_URL; do
   FILE="`basename $i`"
-	echo "bla2"
+
   case $FILE in
   $2)
     f="$SOURCES/$1/$FILE"
