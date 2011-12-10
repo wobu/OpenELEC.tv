@@ -1,7 +1,7 @@
 #!/bin/sh
 ################################################################################
-#      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2011 Stephan Raue (stephan@openelec.tv)
+#      Copyright (C) 2009-2010 OpenELEC.tv
+#      http://www.openelec.tv
 #
 #  This Program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -19,16 +19,27 @@
 #  http://www.gnu.org/copyleft/gpl.html
 ################################################################################
 
-#
-# copy system config
+# start MD monitoring daemon
 #
 # runlevels: openelec, textmode
 
-OPENELEC_SETTINGS="$HOME/.xbmc/userdata/addon_data/os.openelec.settings/settings.xml"
+(
+	if [ -f /var/config/settings.conf ]; then
+		. /var/config/settings.conf
+	
+		if [ "$MDADM_START" = "true" ]; then
 
-if [ -f "$OPENELEC_SETTINGS" ]; then
-  progress "creating system settings"
+			RUNDIR=/var/run/mdadm
+			PIDFILE=$RUNDIR/monitor.pid
 
-	mkdir -p /var/config
-	cat "$OPENELEC_SETTINGS" | awk -F\" '{print $2"=\""$4"\""}' | sed '/^=/d' > /var/config/settings.conf
-fi
+			progress "Assembling MD devices"
+			mdadm --assemble --scan
+
+			progress "Starting MD monitoring service" "mdadm --monitor"
+			mkdir -p $RUNDIR
+
+			mdadm --monitor --pid-file $PIDFILE --daemonise --scan
+
+		fi
+	fi
+)&

@@ -42,4 +42,8 @@ if [ -d /usr/config ]; then
     for sample in `find . -type f -name "*.sample"`; do
       cp $sample /storage/.config/$sample
     done
+
+	if [ ! -f /storage/.config/fstab ]; then
+	  cp fstab /storage/.config/fstab
+	fi
 fi

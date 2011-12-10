@@ -105,7 +105,6 @@ IMAGE_NAME="$DISTRONAME-$TARGET_VERSION"
   $SCRIPTS/install linux system
   $SCRIPTS/install busybox
   $SCRIPTS/install util-linux
-  $SCRIPTS/install mdadm
 
 # Network support
   [ "$NETWORK" = "yes" ] && $SCRIPTS/install network
@@ -147,6 +146,10 @@ IMAGE_NAME="$DISTRONAME-$TARGET_VERSION"
 
 # OEM packages
   [ "$OEM_SUPPORT" = "yes" ] && $SCRIPTS/install oem
+
+# RAID support
+  [ "$RAID_SUPPORT" = "yes" ] && $SCRIPTS/install mdadm
+
 
 # run depmod
   KVER=`ls $BUILD/linux-*/modules/lib/modules`

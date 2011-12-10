@@ -262,6 +262,9 @@
 # build with installer (yes / no)
   INSTALLER_SUPPORT="yes"
 
+# build with raid support (yes / no)
+  RAID_SUPPORT="no"
+
 # Testpackages for development (yes / no)
   TESTING="no"
 

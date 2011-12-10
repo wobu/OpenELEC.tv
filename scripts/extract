@@ -27,10 +27,6 @@ if [ -z "$3" ]; then
   exit 1
 fi
 
-if [ -z "$PKG_URL" ] && [ -n "$PKG_PATH" ]; then
-	PKG_URL=$PKG_PATH
-fi
-
 [ -z "$PKG_URL" ] && exit 1
 [ ! -d "$SOURCES/$1" -o ! -d "$3" ] && exit 1
 

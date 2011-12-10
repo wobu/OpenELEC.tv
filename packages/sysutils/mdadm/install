@@ -23,7 +23,16 @@
 . config/options $1
 
 mkdir -p $INSTALL/etc/mdadm/
-	cp $PKG_BUILD/mdadm.conf-example $INSTALL/etc/mdadm/mdadm.conf
+	cp $PKG_BUILD/mdadm.conf-example $INSTALL/usr/config/mdadm.conf
+	ln -sf /storage/.config/mdadm.conf $INSTALL/etc/mdadm/mdadm.conf
 
-mkdir -p $INSTALL/sbin/mdadm/
-	cp $PKG_BUILD/mdadm $INSTALL/sbin/mdadm/mdadm
+cp $PKG_BUILD/udev-md-raid.rules $INSTALL/usr/lib/udev/rules.d/64-md-raid.rules
+
+mkdir -p $INSTALL/usr/sbin/
+	cp $PKG_BUILD/mdadm $INSTALL/sbin/mdadm
+
+# move and link fstab
+	touch $INSTALL/etc/fstab
+	mv $INSTALL/etc/fstab $INSTALL/usr/config/fstab
+	ln -sf /storage/.config/fstab $INSTALL/etc/fstab
+

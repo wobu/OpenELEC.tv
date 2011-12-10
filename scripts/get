@@ -29,10 +29,7 @@ if [ -z "$1" ]; then
   done
 fi
 
-if [ -z "$PKG_URL" ] && [ -z "$PKG_PATH" ]; then
-	exit 0
-fi
-
+[ -z "$PKG_URL" ] && exit 0
 
 if [ -n "$PKG_URL" ]; then
   URLS="$URLS `echo $PKG_URL | sed s%GEEXBOX_SRCS%$GEEXBOX_SRCS%`"
@@ -74,42 +71,4 @@ if [ -n "$PKG_URL" ]; then
     rm -f $BUILD_BASE*/$STAMPS_NOARCH/$1/build
 
   done
-fi
-
-if [ -n "$PKG_PATH" ]; then
-
-	for i in $PKG_PATH; do
-		PACKAGE="$SOURCES/$1/`basename $i`"
-		STAMP="$PACKAGE.url"
-		MD5SUM="$PACKAGE.md5"
-
-		mkdir -p $SOURCES/$1
-
-		if [ -f "$STAMP" ]; then
-		[ `cat $STAMP` = "$i" ] && continue
-		fi
-		DL="yes"
-
-		$SCRIPTS/checkdeps get
-
-		rm -f $STAMP
-
-		printf "%${INDENT}c GET      $1\n" >&$SILENT_OUT
-		export INDENT=$((${INDENT:-1}+$INDENT_SIZE))
-
-		NBWGET="1"
-		until [ -f "$STAMP" ] || cp $i $SOURCES/$1; do
-		NBWGET=$(($NBWGET+1))
-		if [ "$NBWGET" -gt "3" ]; then
-		echo -e "\nCant't get $1 sources : $i\n Try later !!"
-		exit 1
-		fi
-		done
-
-		echo $i > $STAMP
-		md5sum -t $PACKAGE > $MD5SUM
-
-		rm -f $BUILD_BASE*/$STAMPS_NOARCH/$1/unpack
-		rm -f $BUILD_BASE*/$STAMPS_NOARCH/$1/build
-	done
 fi

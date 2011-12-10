@@ -26,6 +26,6 @@ cd $PKG_BUILD
 
 make
 
-mkdir -p $SYSROOT_PREFIX/sbin/mdadm/
-mkdir -p $SYSROOT_PREFIX/sbin/mdmon/
-$MAKEINSTALL
+#mkdir -p $SYSROOT_PREFIX/sbin/mdadm/
+#mkdir -p $SYSROOT_PREFIX/sbin/mdmon/
+#$MAKEINSTALL
