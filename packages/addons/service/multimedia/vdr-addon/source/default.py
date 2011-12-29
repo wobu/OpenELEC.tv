@@ -1,9 +1,6 @@
-#!/bin/sh
-
 ################################################################################
 #      This file is part of OpenELEC - http://www.openelec.tv
 #      Copyright (C) 2009-2011 Stephan Raue (stephan@openelec.tv)
-#      Copyright (C) 2010-2011 Roman Weber (roman@openelec.tv)
 #
 #  This Program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -21,19 +18,15 @@
 #  http://www.gnu.org/copyleft/gpl.html
 ################################################################################
 
-. config/options $1
+import os
+import sys
+import xbmcaddon
 
-cd $PKG_BUILD
-CONFIG_SHELL=/bin/bash \
-./configure --host=$TARGET_NAME \
-            --build=$HOST_NAME \
-            --prefix=/usr \
-            --exec-prefix=/usr \
-            --sysconfdir=/etc \
-            --datadir=/usr/share \
-            --enable-shared \
-            --disable-static \
+__scriptname__ = "VDR Service"
+__author__ = "OpenELEC"
+__url__ = "http://www.openelec.tv"
+__settings__   = xbmcaddon.Addon(id='service.multimedia.vdr-addon')
+__cwd__        = __settings__.getAddonInfo('path')
+__path__       = xbmc.translatePath( os.path.join( __cwd__, 'bin', "vdr.service") )
 
-make
-
-cp -P libattr/.libs/*.so* $SYSROOT_PREFIX/usr/lib/
+os.system(__path__)
