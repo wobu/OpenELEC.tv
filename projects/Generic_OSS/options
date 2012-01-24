@@ -224,9 +224,6 @@
 # e.g. GRAPHIC_DRIVERS="i915 i965 r300 r600 nvidia nouveau"
   GRAPHIC_DRIVERS="i915 i965 r200 r300 r600 nouveau vmware"
 
-# Mesa to use (Mesa / mesa)
-  MESA="mesa"
-
 # Use VDPAU video acceleration (needs nVidia driver and a supported card)
   VDPAU="no"
 
@@ -260,7 +257,7 @@
 # 'all' compiles all drivers;
 # 'all,!xxx,!yyy' de-selects previously selected drivers
 # "none" for disable LCD support
-  LCD_DRIVER="irtrans,imon,imonlcd,mdm166a"
+  LCD_DRIVER="irtrans,imon,imonlcd,mdm166a,MtxOrb"
 
 # additional Firmware to use (dvb-firmware, misc-firmware, wlan-firmware)
 # Space separated list is supported,
