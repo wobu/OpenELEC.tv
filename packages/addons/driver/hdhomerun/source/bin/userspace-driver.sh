@@ -20,17 +20,46 @@
 #  http://www.gnu.org/copyleft/gpl.html
 ################################################################################
 
-. config/options $1
+. /etc/profile
 
-setup_toolchain host
+ADDON_DIR="$HOME/.xbmc/addons/driver.dvb.hdhomerun"
+ADDON_HOME="$HOME/.xbmc/userdata/addon_data/driver.dvb.hdhomerun"
 
-LDFLAGS="$LDFLAGS -fwhole-program"
+mkdir -p $ADDON_HOME
 
-cd $BUILD/$1*/squashfs-tools
-make mksquashfs \
-     XZ_SUPPORT=1 \
-     LZO_SUPPORT=1 \
-     INCLUDEDIR="-I. -I$ROOT/$TOOLCHAIN/include"
+if [ ! -f "$ADDON_HOME/dvbhdhomerun.sample" ]; then
+  cp $ADDON_DIR/config/* $ADDON_HOME/
+fi
 
-mkdir -p $ROOT/$TOOLCHAIN/bin
-  cp mksquashfs $ROOT/$TOOLCHAIN/bin
+if [ -z "$(pidof userhdhomerun)" ]; then
+  rm -f /tmp/dvbhdhomerun
+  if [ -f $ADDON_HOME/dvbhdhomerun.conf ]; then
+    ln -s $ADDON_HOME/dvbhdhomerun.conf /tmp/dvbhdhomerun
+  fi
+
+  # if not already added
+  modprobe dvb_hdhomerun
+  modprobe dvb_hdhomerun_fe
+
+  mkdir -p /var/log/
+  rm -f /var/log/dvbhdhomerun.log
+  
+  export LD_LIBRARY_PATH=$ADDON_DIR/lib:$LD_LIBRARY_PATH
+
+  userhdhomerun -f
+  # how much time should we wait?
+  usleep 1000000
+  if [ -f $ADDON_HOME/extra-wait.sh ]; then
+    sh $ADDON_HOME/extra-wait.sh
+  fi
+
+# save adapter names in background
+(
+  sleep 4
+  sn_old=$(cat $ADDON_HOME/adapters.txt 2>/dev/null)
+  sn_new=$(grep "Name of device: " /var/log/dvbhdhomerun.log)
+  if [ "$sn_old" != "$sn_new" ]; then
+    echo -n $sn_new >$ADDON_HOME/adapters.txt
+  fi
+)&
+fi
