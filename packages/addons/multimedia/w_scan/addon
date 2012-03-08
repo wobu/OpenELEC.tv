@@ -20,8 +20,7 @@
 #  http://www.gnu.org/copyleft/gpl.html
 ################################################################################
 
-. config/options $1
+. config/options
 
-cd $PKG_BUILD
-
-$CC -Wall -O0 -g -o tvdump tvdump.c -lpciaccess
+mkdir -p $ADDON_BUILD/$PKG_ADDON_ID/bin
+  cp $PKG_BUILD/w_scan $ADDON_BUILD/$PKG_ADDON_ID/bin
