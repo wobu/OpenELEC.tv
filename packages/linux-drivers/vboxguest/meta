@@ -17,21 +17,19 @@
 #  the Free Software Foundation, 51 Franklin Street, Suite 500, Boston, MA 02110, USA.
 #  http://www.gnu.org/copyleft/gpl.html
 ################################################################################
-# Disklabel for System an Storage partition
-  DISKLABEL_SYSTEM="System"
-  DISKLABEL_STORAGE="Storage"
 
-# Defaultsize of system partition (Cylinder: 16=132MB, 31=255MB)
-  PARTSIZE_SYSTEM="31"
-
-# additional parameters to extlinux
-  EXTLINUX_PARAMETERS="vga=792"
-
-# enable BIOS update function
-  BIOS_UPDATE="no"
-
-# BIOS file to program
-  BIOS_FILE=""
-
-# location for BIOS backup (with filename)
-  BIOS_BACKUP=""
+PKG_NAME="vboxguest"
+PKG_VERSION="4.1.8"
+PKG_REV="1"
+PKG_ARCH="any"
+PKG_LICENSE="GPL"
+PKG_SITE="http://www.virtualbox.org"
+PKG_URL="${DISTRO_SRC}/${PKG_NAME}-${PKG_VERSION}.tar.bz2"
+PKG_DEPENDS=""
+PKG_BUILD_DEPENDS="toolchain linux"
+PKG_PRIORITY="optional"
+PKG_SECTION="driver"
+PKG_SHORTDESC="vboxguest"
+PKG_LONGDESC="vboxguest"
+PKG_IS_ADDON="no"
+PKG_AUTORECONF="no"
