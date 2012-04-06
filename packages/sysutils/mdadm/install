@@ -26,8 +26,6 @@ mkdir -p $INSTALL/etc/mdadm/
 	cp $PKG_BUILD/mdadm.conf-example $INSTALL/usr/config/mdadm.conf
 	ln -sf /storage/.config/mdadm.conf $INSTALL/etc/mdadm/mdadm.conf
 
-cp $PKG_BUILD/udev-md-raid.rules $INSTALL/usr/lib/udev/rules.d/64-md-raid.rules
-
 mkdir -p $INSTALL/usr/sbin/
 	cp $PKG_BUILD/mdadm $INSTALL/sbin/mdadm
 
