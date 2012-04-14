@@ -18,19 +18,18 @@
 #  http://www.gnu.org/copyleft/gpl.html
 ################################################################################
 
-PKG_NAME="automake"
-PKG_VERSION="1.11.5"
+PKG_NAME="xdotool"
+PKG_VERSION="2.20110530.1"
 PKG_REV="1"
-PKG_ARCH="any"
+PKG_ARCH=""
 PKG_LICENSE="GPL"
-PKG_SITE="http://sources.redhat.com/automake/"
-PKG_URL="http://ftp.gnu.org/gnu/automake/$PKG_NAME-$PKG_VERSION.tar.xz"
+PKG_SITE="http://www.semicomplete.com/projects/xdotool/"
+PKG_URL="http://semicomplete.googlecode.com/files/${PKG_NAME}-${PKG_VERSION}.tar.gz"
 PKG_DEPENDS=""
-PKG_BUILD_DEPENDS="ccache autoconf"
+PKG_BUILD_DEPENDS="toolchain"
 PKG_PRIORITY="optional"
-PKG_SECTION="toolchain/devel"
-PKG_SHORTDESC="automake: A GNU tool for automatically creating Makefiles"
-PKG_LONGDESC="This is Automake, a Makefile generator. It was inspired by the 4.4BSD make and include files, but aims to be portable and to conform to the GNU standards for Makefile variables and targets. Automake is a Perl script. The input files are called Makefile.am. The output files are called Makefile.in; they are intended for use with Autoconf. Automake requires certain things to be done in your configure.in."
+PKG_SECTION="x11/app"
+PKG_SHORTDESC="This tool lets you simulate keyboard input and mouse activity, move and resize windows, etc.."
+PKG_LONGDESC="This tool lets you simulate keyboard input and mouse activity, move and resize windows, etc.."
 PKG_IS_ADDON="no"
-
 PKG_AUTORECONF="no"

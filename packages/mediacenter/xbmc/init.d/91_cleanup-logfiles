@@ -1,8 +1,6 @@
-#!/bin/sh
-
 ################################################################################
-#      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2012 Stephan Raue (stephan@openelec.tv)
+#      Copyright (C) 2009-2010 OpenELEC.tv
+#      http://www.openelec.tv
 #
 #  This Program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -20,23 +18,10 @@
 #  http://www.gnu.org/copyleft/gpl.html
 ################################################################################
 
-. /etc/profile
+# starting XBMC
+#
+# runlevels: openelec
 
-LOCKFILE="/var/lock/boblightd.sleep"
-
-case "$1" in
-  hibernate|suspend)
-    progress "Shutting down boblightd for suspending..."
-    boblightd.stop
-    touch $LOCKFILE
-    ;;
-  thaw|resume)
-    progress "Restarting boblightd for wakeup..."
-    if [ -f "$LOCKFILE" ] ; then
-      rm -rf "$LOCKFILE"
-      boblightd.start
-    fi
-    ;;
-  *) exit $NA
-    ;;
-esac
+progress "clean up log files"
+  rm -f /storage/.xbmc/userdata/addon_data/*/*.log 2>/dev/null
+  rm -rf /storage/.xbmc/userdata/addon_data/*/log/* 2>/dev/null
