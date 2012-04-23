@@ -1,8 +1,6 @@
-#!/bin/sh
-
 ################################################################################
-#      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2012 Stephan Raue (stephan@openelec.tv)
+#      Copyright (C) 2009-2010 OpenELEC.tv
+#      http://www.openelec.tv
 #
 #  This Program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -20,18 +18,20 @@
 #  http://www.gnu.org/copyleft/gpl.html
 ################################################################################
 
-. config/options $1
+# initialize tbs ir
+#
+# runlevels: openelec
 
-if [ "$ICONV" = "libiconv" ]; then
-  export LDFLAGS="$LDFLAGS -liconv"
-fi
-
-cd $PKG_BUILD
-./configure --prefix=/usr \
-            --arch=$TARGET_ARCH \
-            --cpu=$TARGET_CPU \
-            --cc=$TARGET_CC \
-            --release
-
-make
-make build.linux/tvheadend.bundle
+(
+  progress "initializing tbs ir"
+    while [ true ] ; do
+      if [ ! -e /dev/dvb/adapter*/frontend* ] ; then
+        sleep 1
+        continue
+      else
+        ir-keytable -c
+        ir-keytable -s rc0 -p NEC,RC6 -w /etc/rc_keymaps/rc6_mce
+        break
+      fi
+    done
+)&
