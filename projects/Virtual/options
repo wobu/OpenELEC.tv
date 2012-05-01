@@ -39,7 +39,7 @@
       #               i686 i586 i486 i386
       # (VIA CPUs)    c3 c3-2
       #
-      TARGET_CPU="core2"
+      TARGET_CPU="i686"
       ;;
 
     x86_64)
@@ -222,6 +222,9 @@
 # e.g. GRAPHIC_DRIVERS="i915 i965 r300 r600 radeon nvidia nouveau"
   GRAPHIC_DRIVERS="vmware virtualbox"
 
+# OpenMAX implementation to use (no / bcm2835-driver)
+  OPENMAX="no"
+
 # Use VDPAU video acceleration (needs nVidia driver and a supported card)
   VDPAU="no"
 
@@ -299,5 +302,12 @@
   ADDON_SERVER_URL="http://addons.openelec.tv"
 
 # set the addon dirs
-  ADDON_PATH="$ADDON_VERSION/Intel/$TARGET_ARCH"
+  case $TARGET_ARCH in
+    i386)
+      ADDON_PATH="$ADDON_VERSION/Generic/$TARGET_ARCH"
+      ;;
+    x86_64)
+      ADDON_PATH="$ADDON_VERSION/Intel/$TARGET_ARCH"
+      ;;
+  esac
   ADDON_URL="$ADDON_SERVER_URL/$ADDON_PATH"
