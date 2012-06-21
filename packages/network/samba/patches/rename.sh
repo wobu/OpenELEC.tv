@@ -1,6 +1,8 @@
+#!/bin/sh
 ################################################################################
 #      This file is part of OpenELEC - http://www.openelec.tv
 #      Copyright (C) 2009-2012 Stephan Raue (stephan@openelec.tv)
+#      Copyright (C) 2010-2011 Roman Weber (roman@openelec.tv)
 #
 #  This Program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -18,19 +20,7 @@
 #  http://www.gnu.org/copyleft/gpl.html
 ################################################################################
 
-PKG_NAME="upower"
-PKG_VERSION="0.9.17"
-PKG_REV="1"
-PKG_ARCH="any"
-PKG_LICENSE="GPL"
-PKG_SITE="http://upower.freedesktop.org/"
-PKG_URL="http://upower.freedesktop.org/releases/$PKG_NAME-$PKG_VERSION.tar.xz"
-PKG_DEPENDS="systemd glib dbus dbus-glib polkit pm-utils"
-PKG_BUILD_DEPENDS="toolchain systemd glib dbus dbus-glib gobject-introspection polkit"
-PKG_PRIORITY="optional"
-PKG_SECTION="system"
-PKG_SHORTDESC="upower: a modular hardware abstraction layer designed for use in Linux systems that is designed to simplify device management."
-PKG_LONGDESC="Upower is a modular hardware abstraction layer designed for use in Linux systems that is designed to simplify device management and replace the current monolithic Linux HAL. Upower includes the ability to enumerate system devices and send notifications when hardware is added or removed from the computer system."
-PKG_IS_ADDON="no"
 
-PKG_AUTORECONF="yes"
+for i in `ls samba-$1-*.patch`; do
+  mv $i `echo $i | sed "s,$1,$2,g"`
+done
