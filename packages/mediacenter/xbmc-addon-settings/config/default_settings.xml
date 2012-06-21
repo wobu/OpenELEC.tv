@@ -31,6 +31,6 @@
     <setting id="SAMBA_PASSWORD" value="openelec" />
     <setting id="UPDATE_AUTO" value="manual" />
     <setting id="X11_KEYMAP" value="us" />
-    <setting id="X11_KEYMAP2" value="" />
-    <setting id="MDADM_START" value="true" />
+	<setting id="X11_KEYMAP2" value="-none-" />
+    <setting id="MDADM_START" value="true" />  
 </settings>
