@@ -1,5 +1,3 @@
-#!/bin/sh
-
 ################################################################################
 #      This file is part of OpenELEC - http://www.openelec.tv
 #      Copyright (C) 2009-2012 Stephan Raue (stephan@openelec.tv)
@@ -20,11 +18,19 @@
 #  http://www.gnu.org/copyleft/gpl.html
 ################################################################################
 
-. config/options $1
+PKG_NAME="scons"
+PKG_VERSION="2.1.0"
+PKG_REV="1"
+PKG_ARCH="any"
+PKG_LICENSE="OSS"
+PKG_SITE="http://www.scons.org/"
+PKG_URL="$SOURCEFORGE_SRC/scons/$PKG_NAME-$PKG_VERSION.tar.gz"
+PKG_DEPENDS="Python-host"
+PKG_BUILD_DEPENDS="Python-host"
+PKG_PRIORITY="optional"
+PKG_SECTION="python/devel"
+PKG_SHORTDESC="SCons: an Open Source software construction tool—that is, a next-generation build tool."
+PKG_LONGDESC="SCons is an Open Source software construction tool—that is, a next-generation build tool."
+PKG_IS_ADDON="no"
 
-echo "### Applying project based patches ###"
-
-for patch in `ls $PROJECT_DIR/$PROJECT/patches/$1`; do
-  cat $PROJECT_DIR/$PROJECT/patches/$1/$patch | patch -d \
-    `echo $PKG_BUILD | cut -f1 -d\ ` -p1
-done
+PKG_AUTORECONF="no"
