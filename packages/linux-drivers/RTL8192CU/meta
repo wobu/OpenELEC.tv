@@ -18,19 +18,19 @@
 #  http://www.gnu.org/copyleft/gpl.html
 ################################################################################
 
-PKG_NAME="jam"
-PKG_VERSION="2.5"
+PKG_NAME="RTL8192CU"
+PKG_VERSION="v3.4.3_4369.20120622"
 PKG_REV="1"
 PKG_ARCH="any"
-PKG_LICENSE="OSS"
-PKG_SITE="http://www.perforce.com/jam/jam.html"
-PKG_URL="$DISTRO_SRC/$PKG_NAME-$PKG_VERSION.tar.bz2"
+PKG_LICENSE="GPL"
+PKG_SITE="http://www.realtek.com.tw/downloads/downloadsView.aspx?Langid=1&PFid=48&Level=5&Conn=4&ProdID=274&DownTypeID=3&GetDown=false&Downloads=true"
+PKG_URL="$DISTRO_SRC/$PKG_NAME-$PKG_VERSION.tar.xz"
 PKG_DEPENDS=""
-PKG_BUILD_DEPENDS="ccache"
+PKG_BUILD_DEPENDS="toolchain linux"
 PKG_PRIORITY="optional"
-PKG_SECTION="toolchain/devel"
-PKG_SHORTDESC="jam: A make-like program"
-PKG_LONGDESC="Jam is a portable build tool with its own interpreted language, allowing to implement rather complex logic in a readable way and without resorting to external programs."
+PKG_SECTION="driver"
+PKG_SHORTDESC="Realtek RTL81xxCU Linux 3.x driver"
+PKG_LONGDESC="Realtek RTL81xxCU Linux 3.x driver"
 PKG_IS_ADDON="no"
 
 PKG_AUTORECONF="no"

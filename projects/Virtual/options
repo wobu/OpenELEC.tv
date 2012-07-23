@@ -166,7 +166,7 @@
 # vboxguest:        Oracle VM VirtualBox Guest Additions / Graphics Card
 # Space separated list is supported,
 # e.g. ADDITIONAL_DRIVERS="asix-ax887xx AF9035 vboxguest"
-  ADDITIONAL_DRIVERS="asix-ax887xx vboxguest"
+  ADDITIONAL_DRIVERS="asix-ax887xx RTL8192CU vboxguest"
   if [ "$PVR" = yes ]; then
     ADDITIONAL_DRIVERS="$ADDITIONAL_DRIVERS AF9035 A867 aver_h826d RTL2832 hdhomerun-driver vtuner-driver"
   fi
@@ -255,7 +255,7 @@
 
 # Use Broadcom CrystalHD Decoder Card for video acceleration 
 # (needs Kernelsupport for Broadcom Decoder Card and a supported card)
-  CRYSTALHD="yes"
+  CRYSTALHD="no"
 
 # build and install remote support (yes / no)
   REMOTE_SUPPORT="yes"
@@ -324,6 +324,7 @@
   COREBOOT="no"
 
 # Distribution Specific source location
+  DISTRO_MIRROR="http://sources.openelec.tv/mirror"
   DISTRO_SRC="http://sources.openelec.tv/$OPENELEC_VERSION"
 
 # Addon Server Url
