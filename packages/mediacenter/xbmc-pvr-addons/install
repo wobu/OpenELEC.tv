@@ -20,6 +20,13 @@
 #  http://www.gnu.org/copyleft/gpl.html
 ################################################################################
 
-for i in `ls xbmc-*.patch`; do
-  mv $i `echo $i | sed "s,$1,$2,g"`
+. config/options $1
+
+for addon in `find $PKG_BUILD/addons/ -type d -name "pvr.*"`; do
+  ADDON=`basename $addon`
+  mkdir -p $INSTALL/usr/share/xbmc/addons/$ADDON
+    cp -PRf $PKG_BUILD/addons/$ADDON/addon/* $INSTALL/usr/share/xbmc/addons/$ADDON
+
+  mkdir -p $INSTALL/usr/lib/xbmc/addons/$ADDON
+    cp -Pf $PKG_BUILD/addons/$ADDON/*.pvr $INSTALL/usr/lib/xbmc/addons/$ADDON
 done

@@ -1,5 +1,4 @@
 #!/bin/sh
-
 ################################################################################
 #      This file is part of OpenELEC - http://www.openelec.tv
 #      Copyright (C) 2009-2012 Stephan Raue (stephan@openelec.tv)
@@ -20,9 +19,25 @@
 #  http://www.gnu.org/copyleft/gpl.html
 ################################################################################
 
-. /etc/profile
+echo "getting sources..."
+  if [ ! -d xbmc-pvr-addons.git ]; then
+    git clone git://github.com/opdenkamp/xbmc-pvr-addons.git xbmc-pvr-addons.git
+  fi
 
-for script in $HOME/.xbmc/addons/*/sleep.d/*.power; do
-  progress "running addon sleep script $script ($1)..."
-  sh $script $1
-done
+  cd xbmc-pvr-addons.git
+    git pull
+    GIT_REV=`git log -n1 --format=%h`
+  cd ..
+
+echo "copying sources..."
+  rm -rf xbmc-pvr-addons-$GIT_REV
+  cp -R xbmc-pvr-addons.git xbmc-pvr-addons-$GIT_REV
+
+echo "cleaning sources..."
+  rm -rf xbmc-pvr-addons-$GIT_REV/.git
+
+echo "packing sources..."
+  tar cvJf xbmc-pvr-addons-$GIT_REV.tar.xz xbmc-pvr-addons-$GIT_REV
+
+echo "remove temporary sourcedir..."
+  rm -rf xbmc-pvr-addons-$GIT_REV

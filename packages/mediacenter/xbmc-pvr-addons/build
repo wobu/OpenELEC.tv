@@ -20,15 +20,14 @@
 #  http://www.gnu.org/copyleft/gpl.html
 ################################################################################
 
-. /etc/profile
+. config/options $1
 
-case "$1" in
-  hibernate|suspend)
-    xbmc-send --host=127.0.0.1 -a "LIRC.Stop"
-    ;;
-  thaw|resume)
-    xbmc-send --host=127.0.0.1 -a "LIRC.Start"
-    ;;
-  *) exit $NA
-    ;;
-esac
+cd $PKG_BUILD
+
+./configure --host=$TARGET_NAME \
+            --build=$HOST_NAME \
+            --prefix=/usr/share/xbmc \
+            --disable-static \
+            --enable-shared
+
+make
