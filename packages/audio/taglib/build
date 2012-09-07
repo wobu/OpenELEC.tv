@@ -22,16 +22,12 @@
 
 . config/options $1
 
-require_eglibc $1
+cd $PKG_BUILD
+mkdir -p build && cd build
 
-ATI_PKG="`echo $PKG_URL | sed 's%.*/\(.*\)$%\1%'`"
-[ -d $PKG_BUILD ] && rm -rf $PKG_BUILD
+cmake -DCMAKE_TOOLCHAIN_FILE=$CMAKE_CONF \
+      -DCMAKE_INSTALL_PREFIX=/usr \
+      ..
 
-sh $SOURCES/$1/$ATI_PKG --extract $BUILD/$PKG_NAME-$PKG_VERSION
-
-echo "### Applying upstream patches ###"
-
-for patch in `ls $PKG_DIR/patches.upstream/*.patch`; do
-  cat $patch | patch -d \
-    `echo $BUILD/$PKG_NAME-$PKG_VERSION | cut -f1 -d\ ` -p1
-done
+make
+$MAKEINSTALL

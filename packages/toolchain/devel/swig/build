@@ -22,16 +22,37 @@
 
 . config/options $1
 
-require_eglibc $1
+setup_toolchain host
 
-ATI_PKG="`echo $PKG_URL | sed 's%.*/\(.*\)$%\1%'`"
-[ -d $PKG_BUILD ] && rm -rf $PKG_BUILD
+cd $PKG_BUILD
+./configure --host=$HOST_NAME \
+            --build=$HOST_NAME \
+            --prefix=$ROOT/$TOOLCHAIN \
+            --with-pcre-prefix=$ROOT/$TOOLCHAIN \
+            --with-boost=no \
+            --without-x \
+            --without-tcl \
+            --without-python \
+            --without-python3 \
+            --without-perl5 \
+            --without-octave \
+            --without-java \
+            --without-gcj \
+            --without-android \
+            --without-guile \
+            --without-mzscheme \
+            --without-ruby \
+            --without-php \
+            --without-ocaml \
+            --without-pike \
+            --without-chicken \
+            --without-csharp \
+            --without-lua \
+            --without-allegrocl \
+            --without-clisp \
+            --without-r \
+            --without-go \
+            --without-d \
 
-sh $SOURCES/$1/$ATI_PKG --extract $BUILD/$PKG_NAME-$PKG_VERSION
-
-echo "### Applying upstream patches ###"
-
-for patch in `ls $PKG_DIR/patches.upstream/*.patch`; do
-  cat $patch | patch -d \
-    `echo $BUILD/$PKG_NAME-$PKG_VERSION | cut -f1 -d\ ` -p1
-done
+make
+make install

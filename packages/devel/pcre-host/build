@@ -22,16 +22,21 @@
 
 . config/options $1
 
-require_eglibc $1
+$SCRIPTS/unpack pcre
 
-ATI_PKG="`echo $PKG_URL | sed 's%.*/\(.*\)$%\1%'`"
-[ -d $PKG_BUILD ] && rm -rf $PKG_BUILD
+setup_toolchain host
 
-sh $SOURCES/$1/$ATI_PKG --extract $BUILD/$PKG_NAME-$PKG_VERSION
+cd $BUILD/pcre-*
+mkdir -p m4 && do_autoreconf
 
-echo "### Applying upstream patches ###"
+mkdir -p .build-host && cd .build-host
 
-for patch in `ls $PKG_DIR/patches.upstream/*.patch`; do
-  cat $patch | patch -d \
-    `echo $BUILD/$PKG_NAME-$PKG_VERSION | cut -f1 -d\ ` -p1
-done
+../configure --host=$HOST_NAME \
+             --build=$HOST_NAME \
+             --prefix=$ROOT/$TOOLCHAIN \
+             --enable-utf8 \
+             --enable-unicode-properties \
+             --with-gnu-ld
+
+make
+make install
